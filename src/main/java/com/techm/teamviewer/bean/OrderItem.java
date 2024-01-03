@@ -33,13 +33,16 @@ public class OrderItem {
 	@Column(name = "OrderItem_Quantity")
 	@NotNull
 	private int orderItemQuantity;
+
+	// many order items can have single order , so it is many to one with order.
+    	@ManyToOne(fetch = FetchType.EAGER)
+   	@JoinColumn(name = "O_Id")
+    	private Order order;
+
+	// each order item associated with Product and it's required quantity. so it is one to one
+    	@OneToOne
+    	private Product product;
 	
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "O_Id")
-    private Order order;
-	
-    @ManyToOne
-    Product product;
 	public int getOrderItemId() {
 		return orderItemId;
 	}
